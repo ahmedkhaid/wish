@@ -4,10 +4,6 @@
 #include <string.h>
 void add_command(char * command , history_t *history)
 {
-    if(history==NULL)
-    {
-        history_init(history);
-    }
     if(history->size>=history->capacity)
     {
         return;
