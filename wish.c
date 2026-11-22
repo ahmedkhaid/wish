@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
+#include "history.h"
 int main(int agrc , char*argv[]){
     char error_message[30] = "An error has occurred\n";
     
@@ -13,7 +14,8 @@ int main(int agrc , char*argv[]){
         printf("%s" ,error_message);
         exit(0);
     }
-   
+   history_t history;
+   history_init(&history);
     while(1)
     {
          printf("wish> ");
@@ -30,6 +32,12 @@ int main(int agrc , char*argv[]){
         getline(&buffer , &n ,stdin);
         if(buffer[0] =='\0') continue;
          buffer[strcspn(buffer, "\n")] = '\0';
+         add_command(buffer,&history);
+         if(strcmp(buffer , "history")==0)
+         {
+            print_commands(&history);
+            continue;
+         }
         char *buffer_copy = strdup(buffer);
         redirection_character = strchr(buffer_copy , '>');
         pip_char = strchr(buffer_copy , '|');
