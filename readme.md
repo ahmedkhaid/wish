@@ -42,6 +42,12 @@ wish> echo hello
 The shell searches for commands directly under `/usr/bin` and will not run
 commands from another directory or a custom `PATH`.
 
+### Built-in commands
+
+- `cd <directory>` changes the shell's current working directory. Provide
+  exactly one directory argument.
+- `exit` ends the shell.
+
 ### Command history
 
 Run `history` to print the commands entered during the current shell session:
@@ -76,7 +82,7 @@ The shell currently supports one pipeline containing two commands.
 
 ## Exiting
 
-Press `Ctrl+D` (end-of-file) or `Ctrl+C` to stop the shell.
+Enter `exit` or press `Ctrl+C` to stop the shell.
 
 ## Error output
 

@@ -38,6 +38,11 @@ int main(int agrc , char*argv[]){
             print_commands(&history);
             continue;
          }
+         else if(strcmp(buffer , "exit")==0)
+         {
+            exit(1);
+         }
+        
         char *buffer_copy = strdup(buffer);
         redirection_character = strchr(buffer_copy , '>');
         pip_char = strchr(buffer_copy , '|');
@@ -70,6 +75,20 @@ int main(int agrc , char*argv[]){
         //Parse the line
         char  read_command[100];
         sscanf(buffer, "%s",read_command);
+        if(strcmp(read_command , "cd")==0)
+        {
+            strtok(buffer_copy, " \t");
+            char *directory = strtok(NULL, " \t");
+            char *extra_argument = strtok(NULL, " \t");
+
+            if(directory == NULL || extra_argument != NULL || chdir(directory) != 0)
+            {
+                printf("%s", error_message);
+            }
+            free(buffer_copy);
+            free(buffer);
+            continue;
+        }
         free(buffer);
         //execute command ;
         char command_arguments[100] = "/usr/bin/";
